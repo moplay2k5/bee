@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
+    transition: filter 0.5s ease;
+    z-index: -1;
+}
+
+#background.menu-active {
+    filter: blur(10px); /* ~75% blur */
+}
+
+#background.game-active {
+    filter: none;
+}
+
+#menu {
+    text-align: center;
+    color: #fff;
+    animation: fadeIn 1s ease-in;
+    z-index: 1;
+}
+
+#menu h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+#menu button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.2rem;
+    background: #00ffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#menu button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00ffff;
+}
+
+#gameContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px #000;
+    display: flex;
+    gap: 20px;
+    z-index: 1;
+}
+
+#pauseBtn {
+    padding: 5px 10px;
+    background: #ff00ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+#player {
+    position: absolute;
+    width: 120px; /* 40px * 3 */
+    height: 120px;
+    background: url('flower.png') no-repeat center center;
+    background-size: contain;
+    transition: transform 0.05s ease;
+    z-index: 1;
+}
+
+.obstacle {
+    position: absolute;
+    width: 62.5px; /* 25px * 2.5 */
+    height: 62.5px;
+    background: url('bee.png') no-repeat center center;
+    background-size: contain;
+    animation: attackPlayer 2s linear forwards;
+    z-index: 1;
+}
+
+@keyframes attackPlayer {
+    0% { 
+        transform: translate(var(--startX), var(--startY)) scale(1); 
+        box-shadow: 0 0 15px #ffff00; 
+        opacity: 1; 
+    }
+    50% { 
+        transform: translate(calc(var(--startX) + (var(--endX) - var(--startX)) * 0.5), calc(var(--startY) + (var(--endY) - var(--startY)) * 0.5)) scale(1.1); 
+        box-shadow: 0 0 25px #ffff00; 
+    }
+    100% { 
+        transform: translate(var(--endX), var(--endY)) scale(1); 
+        box-shadow: 0 0 15px #ffff00; 
+        opacity: 0.5; 
+    }
+}
+
+.power-up {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    animation: float 3s ease-in-out infinite;
+    box-shadow: 0 0 10px currentColor;
+    z-index: 1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.hidden {
+    display: none;
+}
+
+.shielded {
+    box-shadow: 0 0 30px #ff00ff, inset 0 0 10px #ff00ff;
+}
+
+@media (orientation: portrait) {
+    #hud {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #menu h1 {
+        font-size: 2rem;
+    }
+}

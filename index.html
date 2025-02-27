@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Dodger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="background"></div>
+    <div id="menu">
+        <h1>Cosmic Dodger</h1>
+        <button id="startBtn">Start Game</button>
+        <button id="exitBtn">Exit Game</button>
+    </div>
+    <div id="gameContainer" class="hidden">
+        <div id="hud">
+            <span id="score">Score: 0</span>
+            <span id="lives">Lives: 5</span>
+            <span id="level">Level: 1</span>
+            <button id="pauseBtn">Pause</button>
+        </div>
+        <div id="player"></div>
+        <div id="obstacles"></div>
+        <div id="powerUps"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
